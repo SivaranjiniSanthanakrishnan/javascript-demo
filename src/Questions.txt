@@ -1,0 +1,715 @@
+QUESTIONS 2:
+
+How to store files in mongodb
+How to install diff versions of node
+
+
+
+08:30 - 10:30
+
+
+Javascript:
+
+How js works? Is it framework or library? 
+What search engine? Callback functions, call stack? 
+Ways to create Object => Constructor, Object.create, Object.assign, Normal Object creation, copy object using spread operator
+DeepCopy: New Value and Address Also. DeepCopy can be achieved through loads function, Deep copy can be achieved using structuredClone() function.
+Shallow Copy: A shallow copy creates a new object or array and copies all top-level properties of the original object or array. However, if the original object contains nested objects or arrays, the shallow copy only copies the references to those nested objects or arrays, not the objects themselves. Shallow Copy can be achieved through Object.assign. 
+Different types of functions | Advantages of IIFE
+  Function Declaration
+  Function Expression
+  Arrow Function
+  IIFE
+  Recursive Function
+  Generator Function
+  Constructor Function
+Explain "this" keyword accessibility
+Immutable datatype | Mutable datatypes
+Promises vs Callbacks 
+setTimeOut vs setInterval Eg  
+Closures Eg 
+Real time eg: Imagine a web page where you can click a button to load and display user data from an API. Each time you click the button, new data is fetched and displayed. The function definition of that button returns the async function of the API call and previously maintains the count of no of calls. The count var act as the closure property and each time that return function is called the value of the count var is preserved. Benefits of Using Closures: (1) State Preservation (2) Encapsulation.  
+Real time use case of Closure:
+1. Data encapsulation and private variables
+2. Event handlers with preserved state
+    function createGreeter(name) {
+      function greet() {
+          console.log("Hello, " + name + "!");
+      }
+
+     return greet;
+    }
+
+    const button1 = document.getElementById("button1");
+    const button2 = document.getElementById("button2");
+
+    button1.addEventListener("click", createGreeter("Alice"));
+    button2.addEventListener("click", createGreeter("Bob"));
+
+    // Clicking button1 or button2 will now log the corresponding greeting message
+3.  Modules and function currying
+4. Memoization : The cached value is stored in the lexical scope and when again the same function is called with the same variable the cached value will have value hence need not to call the inner return function again to calculate complex variable.
+5. Namespaces and avoiding variable collisions
+6. Iterators and generators
+7. Function factories with configuration
+8. Debouncing and throttling user input
+https://medium.com/deno-the-complete-reference/10-use-cases-of-closures-in-javascript-98fe0eab36db
+
+Call, Apply and Bind Eg
+Call over Normal Function uses:
+1. Setting the `this` Context
+2. Invoking Functions with Different this Values
+Why call or apply Do Not Affect Arrow Functions
+1. Design Intent
+2. Permanent Lexical Binding
+Use strict 
+1. Assigning to Non-Writable Properties
+2. Assigning to Non-Configurable Properties
+3. Assigning to a Getter-Only Property
+4. Assigning to an Undeclared Variable
+5. Assigning to a Read-Only Property
+6. Deleting an Undeletable Property like prototype
+7. Duplicate Parameter Names
+8. Octal Literals like assigning 010
+9. Octal Escape Sequences
+10. No Automatic arguments Object Updates
+11. this Behavior in function
+
+"use strict";
+function f() {
+    return this;
+}
+console.log(f()); // undefined in strict mode, global object in non-strict mode
+
+
+Variable Hoisting : let and const also will be hoisted but it remains un-initialized, whereas var will be initialised with undefined once hoisted. Since let and const is un-initialized, it will throw reference error before accessing the element.
+Spread operator Eg
+Immediately Invoked Function
+What is localStorage and sessionStorage?
+Web socket
+  The WebSocket object provides the API for creating and managing a WebSocket connection to a server, as well as for sending and receiving data on the connection. To construct a WebSocket , use   the WebSocket() constructor.
+WebSocket Communication Flow
+1. Handshake
+2. Data Transmission : The data frames sent over the connection are smaller and more efficient compared to HTTP headers
+3. Closing the Connection
+
+drawbacks of cookies
+    Browser Impacts. Cookies are not restricted based on internet usage
+    Security Risks. Since cookies are stored in the hard drive as text files, it posses some serious security risks
+    Size Limitations. Size limitations also exist on cookies.
+    Privacy Concerns
+    Manual Disabling
+Geolocation API - getCurrentPosition(), watchPosition(), clearPosition()
+DOM manipulation overcome 
+Snippets 
+
+
+Adv Javascript:
+How javascript internally works
+What are all the ways to create obj in javascript 
+Variable Hoisting // Snippet
+What is getter and setter, why do we want to use getter and setter incase if we have functions?
+Advantages of arrow functions
+1. Latest Syntax
+2.  Lexical this Binding
+3. No arguments Object
+4. Implicit Return
+5. Simplified Callback
+6. No Duplicate Parameter Names
+Advantages of using class and object, Real time use case of class-
+1. Encapsulate  related data and behavior into a single entity
+2. Class Inheritance and Reusability:
+3. Abstraction
+4. Modularity and Reusability
+Event Propogation:
+Throatling - Throttling limits the number of times a function is called over a specified period. Subsequent events that occur within the interval are ignored until the interval has elapsed.
+Debouncing - When an event occurs, the event handler function is not immediately invoked. Instead, a timer is started, and the function is scheduled to execute after the specified delay.
+Difference between function declaration and function expression
+concept of prototypal inheritance in JavaScript
+JavaScript handle memory management and garbage collection
+  It stores data in two memory spaces, the Stack and the Heap. The stack is used to store static data, whereas the heap is used to store dynamic data. The stack contains references to the objects in a heap. JavaScript also uses a garbage collector to deallocate unused memory from the heap. The mark and sweep technique is one of the most common garbage collection algorithms.
+Event Bubbling
+Event Propagation
+Debouncing:
+  A Debounce function is a higher-order function that returns another function, to create closure around the function parameters (func, timeout) and the timer variable. Delay the operation which is written on the event for the certain period of time to avoid continuous execution of that operation. 
+Function Currying 
+Memoization in JS:
+  Memoization is an optimization technique used to improve the performance of functions by caching the results of expensive function calls and returning the cached result when the same inputs occur again. Cache the result of an recursive function, with its parameter as the cache keyword. (cache[param]). If same parameter again comes then we can return the result from cache.
+Memization (cache in js) can be achieved using HOF (higher order functions). Check memoization in JS with fibnocci series as example.
+Side Effects: Refers to any changes that a function makes outside of its scope, particularly changes to the state of variables or objects outside of the function's local scope. These changes could include performing I/O operations such as writing to the console or modifying the DOM in a web environment.
+Generic: You can define functions that work with any data type using generics. This allows you to write functions that are type-safe and reusable across different types.
+Handle WebSocket: 
+1.  Server : Create a web socket server, Client: Connect to a server web socket by using server point and domain
+2. Client: Open events. socket.addEventListener("open”, (event) => ()). Through this event we will come to know that connection established successfully
+3. Server: Once connection established, sends a message in ws.send(“”message to client). Client: Receives the server message, socket.addEventListener("message", (event) => {})
+4. Client: Client can send message through socket.send(“”Message to server”). Server: It can receive client’s message on ws.on("message", (message) => {})
+
+Publish/Subscribe a particular topic is not implemented in Websocket. Though it is implemented in other latest services like Kafka, RabbitMQ etc., But if you want to publish or subscribe a message under a particular topic then you have to do manually. You can send a JSON message with key value as the topic and get the message with particular key value in client. 
+If there are multiple client connection in server, and if each client is having specific topic then you can create Map for each client and their topics can be added in Set, so that topics won’t be repeated. Next time if you want to publish a particular message from a particular client from a particular topic you can choose and send from server. 
+WebSocket event available at client side is Open, Message, Close and Error, available at the server side is Connection, Message, Close and Error.
+Network Disconnection during socket messages: It involves following steps in client side if server fails to send message from client to server, 1. Detecting Disconnection, 2. Reconnecting, 3. Message Queue, 4. Heartbeat/Ping-Pong
+if (socket.readyState === WebSocket.OPEN) {
+         socket.send(message);
+ } else {
+       messageQueue.push(message);
+ }
+If server fails while publishing the message, then all the messages can be stored in DB with the status of each message, so that we will be having track of what messages sent and received. All client should be in a position to reconnect server for multiple times. 
+Authentication in Websocket can be achieved through sending the token in url as query params (less preferred),(2) using cookie and session. The token can be send from client over TCP as request cookie and in the node js the cookie can be parsed using cookie-parser and validate the JSON token and set session id and name for the particular validated user. (3) Token can also be sent over req.headers which is complex and less preferred. 
+
+Memory Management in Javascript: 
+1. Static Memory - Static memory allocation is the process of allocating fixed memory space at compile time before the associated program is executed.
+2. Dynamic memory allocation occurs at runtime, allowing for flexible memory usage as needed by the application.
+3. Primitives are stored directly on the stack, while objects are stored in the heap and accessed via references.
+Garbage Collection: JavaScript uses garbage collection to automatically reclaim memory occupied by objects that are no longer reachable in the program.The most common garbage collection algorithm used is mark-and-sweep. 
+Mark Phase: The garbage collector traverses the object graph, starting from the root, marking all reachable objects.
+Sweep Phase: The collector then deallocates memory occupied by objects that were not marked as reachable.
+Key Points in JavaScript Memory Management
+1. Automatic Memory Management
+2. Scope and Lifetimes - Local variables within functions are eligible for garbage collection once the function execution is complete, provided there are no references to them.
+3. Closures - Variables within closures can prevent memory from being reclaimed if references to the closure persist, potentially leading to memory leaks.
+4. Common Pitfalls: Memory Leaks and Global Variables - Variables declared without var, let, or const become global and persist throughout the lifetime of the application, leading to potential memory bloat.
+5. DOM References: Ensure that references to DOM elements are removed when the elements are no longer needed.
+6. Clear Timers and Callbacks
+Tools and Techniques for Detecting Memory Leaks in Node.js
+1. To Identify memory leaks we can take heap snapshot both at initial stage of Application and after complex operation of the application. The heap snapshot shows the memory occupied for each variable types like object, string, array. Under developer tools-> Memory we could take heap snapshot
+2. Monitoring Memory Usage: Regularly monitor the memory usage of your Node.js application. A consistent increase in memory usage over time without a corresponding drop indicates a potential memory leak.
+
+Just-In-Time Compiler: Just-In-Time (JIT) compilation is a technique used to improve the performance of interpreted languages like JavaScript by compiling code into machine code at runtime, rather than before execution. JIT compilation aims to combine the advantages of both interpretation and compilation.
+  How JIT Compilation Works : Interpretation - The interpreter executes the code line by line, converting each line to machine code and running it immediately, Hot Code Detection - The JIT compiler monitors the running code to detect frequently executed (hot) code paths or functions, Compilation and Execution 
+  JIT compilers can make use of runtime information to apply more effective optimizations that are not possible during ahead-of-time compilation.
+This can include inlining functions, optimizing loops, and eliminating redundant calculations.
+Difference between interpretation and Compilation:
+Interpretation: Directly executes source code line by line. Provides immediate feedback and portability but can be slower.
+Compilation: Translates the entire source code into machine code before execution. Provides faster execution and optimizations but is platform-specific.
+JIT Compilation: Combines interpretation and compilation, compiling frequently executed code at runtime for better performance while retaining flexibility.
+  JavaScript is often described as an interpreted language because, traditionally, it was executed directly by the browser's JavaScript engine without an explicit compilation step.
+
+React JS:
+How will you reuse a component ?
+Virtual DOM.
+Why React? 
+Second argument that can optionally be passed to useState?
+Second argument that can optionally be passed to useEffect?
+What ll you choose? Class or Functional Component
+Purpose of super(props) in constructor?
+useEffect => ComponentDidUnMount (Practical)
+Difference between export default vs export 
+HOC : Real time scenario  => logging, error handling, or performance tracking, Encapsulation of Behavior, Separation of Concerns
+Pure Components vs Components
+Context API's : Alternative for Redux => Avoid Props Drilling, Properties like theme colour if changes in one place it will be automatically consumed in all places
+how to communicate the parent component from child component => Callback Functions, useRef
+Write Class Component skeleton (Practical)
+Write Controlled Form with one field (Practical)
+Diff between browser router and hash router
+Thunk
+How can we prevent loading of large amount of data in a HomeComponent Ans : (Redux)
+Snippets
+How to handle token in Front end
+Redux: Predictable State Management, Centralized State, Consistency Across Environments,  Managing complex state in large applications, Server-side Rendering, 
+How SSR (Server Side Render) Works in React: (1) Request to Server (2) Render on Server (3) Send HTML to Client (4) Hydration 
+Benefits of SSR : (1) Improved SEO (2) Faster Initial Load (3) Social Media Sharing
+How useContext with useReducer is replacement of Redux? => useReducer will provide state and dispatch, we can pass this state and dispatch via provider from the home component to all child components, Hence the child components if want to do some operation it can consume dispatch operation. This workflow is used is less complex applications. This doesn’t support middleware like thunk.
+Reat 18 features:
+1. Concurrent Rendering : const [isPending, startTransition] = useTransition();
+2. Automatic Batching of Updates => Don’t re-render continuously for two continuous state updates
+3.  useServerData custom react hook => will fetch the data from cache based on key if already available instead of doing API call
+4. Improved Suspense API => Gives the fallback params where we can place loader until promise resolves.
+5. Built-in Transitions and Animations
+Redux toolkit
+How will you make state variables as mutable in Redux => Using produce function from immer library, or you can copy the state object directly and make changes. 
+  By default Redux behaves Im-mutably and changing it to mutably may lead to performance, debugging issues. Can’t maintain ore and next state etc., 
+  Changing it to mutably means updating the state value directly and returning in reducer without making it copy
+How will you optimise project? - Code Splitting (Suspense API, Lazy loading), useTransition, Redux, useMemo, useCallback, Webpack Bundle Analyzer (Checks which module occupies more size in bundle using graph, chart etc., ), Automatic batching updates, Tree Shaking Difficulties faced on Project? 
+How will you prevent multiple re-rendering in React JS? 
+
+React.StrictMode ? - (1) Identify and warn about deprecated methods, (2) Warn about multiple re-rendering happens through API call, (3) It warns about the usage of legacy string refs (ref="myRef") instead of callback refs (ref={myRef => this.myRef = myRef}), which are the recommended approach for accessing DOM elements in modern React applications
+Get prev State of state variable, (4) It will warn about the case sensitivity of event handlers,(5) warn about unsafe practice such as API call directly inside render method.
+
+How will you handle error in another way? - Having Error Boundary Component, it will catch error using the lifecycle method called componentDidCatch. Error Boundary Component is wrapped around component and if any error occurs at the child component, it will start propagate searching for nearest componentDidCatch and it will render that error component’s UI. Or using inbuilt ErrorBoundry component from react-error-boundary library to support fallback UI in functional component. Or you can write componentDidCatch In class component and Wrap it over functional component to catch error using HOC.  
+
+Service Worker in React JS:
+A service worker is a type of web worker that acts as a programmable proxy between your web application and the network. It runs in the background, separate from the main browser thread, and can intercept network requests, cache resources, and provide offline support for web applications. It can be implemented using create react app automatically or by manual integration by adding window.addEventListener('load', manual integration. 
+Service Worker are used to Background Processing, Network Interception, Offline Support, Push Notifications and Progressive Web Apps (PWAs)
+useRef: Used to take reference of either child component or any html tag to access it’s element. If it is a reference of Child component, then all the values and html tags of child component can be accessible in parent
+useRef along with forwardRef: forwardRef is a wrapper function or HOC in child component which forward’s the child component’s elements to the parent component. Parent component access it’s element using useRef. The diff bet. Prev and this is, in case of forward Ref, we will get the ref as props from parent component, and we could choose which element could be referred from the child component by referring the element with the ref props. 
+
+Ready 18 Hooks: 
+* useImperativeHandle - useImperativeHandle is a React hook that allows you to customize the value that is exposed by a component when it is used with ref. It is particularly useful when you're working with functional components and you want to expose only certain methods or properties of the component's instance to its parent component.
+* useLayoutEffect - useLayoutEffect is a React Hook that is similar to useEffect, but it runs synchronously after all DOM mutations. This makes it suitable for operations that need to be performed after the DOM has been updated but before the browser paints the screen.
+* useDebugValue - useDebugValue is a React Hook used for debugging purposes. It allows you to display custom labels for custom hooks in React DevTools. This can be helpful when you're working with custom hooks and want to provide additional information about their state or behavior. Eg.,   useDebugValue(loading ? 'Loading...' : `Data: ${data}`); before returning hook
+* useDeferredValue - It allows you to delay updating a value until a specified time has passed, enabling smoother transitions and better performance by deferring less critical updates.
+This hook is particularly useful for optimizing user interfaces and prioritizing updates based on their importance. By deferring less critical updates, you can ensure that more critical updates are processed first, leading to a more responsive and efficient user experience.
+  const [text, setText] = useState('');
+    const deferredText = useDeferredValue(text, { timeoutMs: 1000 });
+    const handleChange = (event) => {
+        setText(event.target.value);
+    };
+* useTransition
+* useId - Custom hook which we can use to create unique id fr either different components or html tag elements or elements inside loop. Uniqueness of the id is maintained by taking previous reference of the value. 
+React.memo() is an alternative for shouldComponentUpdate in functional component: If you wrap your functional component inside React.memo() whenever you update state variable in functional component if it’s value doesn’t change then the component won’t be re-rendered. This simulates the behaviour of shouldComponentUpdate. Also when you wrap child component inside React.Memo child re-rendering won’t occur when parent’s state variable is updated.
+useRef()
+If a reducer dispatches an action in Redux, it would lead to an infinite loop or a stack overflow error. If a reducer dispatches an action, it would disrupt this flow and cause an infinite loop because each dispatched action would trigger the reducer again, leading to another dispatch, and so on.
+useMemo vs useCallback: useMemo is used for memoizing the result of a computation, while useCallback is used for memoizing a function instance. They both accept an array of dependencies as the second argument to determine when to recalculate or recreate the memoized value or function.
+Microfrontend: Microfrontends is an architectural style where a front-end application is decomposed into individual, semi-independent "micro" applications, each responsible for a specific feature or section of the overall UI. Implementation Strategy can either be  Build-Time Integration or Run-Time Integration. Implementation example: 1. Using iframes, 2. Single SPA, 3. Module Federation (Webpack 5) - ModuleFederationPlugin. It can be communicated using  Custom Events, Shared State (Using a shared state management solution like Redux or Context API), 
+React Router Sending data:
+1. Using state: <Link to={{ pathname: '/componentB', state: data }}> || And receive it using hooks useLocation=> location.state
+2. Using useContext: Create a global context and wrap as provider in routing. Set the provider data in componentA and consume the data in componentB. 
+
+
+
+Node JS: 
+Single Threaded? Event loop and architecture?
+How to allow CORS in Express 
+Autho vs Auth 
+Status Err codes 
+process.exit() 
+Middleware
+Create a simple server in Node.js (Practical)
+How to Config properties in Express JS
+What is the use of next in Express JS
+app.get(
+  '/next', function (req,res,next) { 
+    console.log('hi there ');
+    next();
+    console.log('you are still here');
+  }
+)
+  
+// API for the testing of return next() 
+app.get(
+  '/return-next', function (req,res,next) { 
+    console.log('hi there');
+    return next(); 
+    console.log('you are still here');
+  }
+)
+
+HTTP methods? PUT | POST / PUT vs PATCH HTTP Methods
+Explain the purpose of ExpressJS package? => Routing, Middleware, Template Engines, Static File Serving, Error Handling, Session Management
+Differentiate between spawn(), spawnSync() and fork() methods in Node.js?
+  Streams in node js will process the file or other network sockets or http requests in chunks instead of processing at the same time
+fork() => method is part of the child_process module and is used to create a new Node.js process that runs a module as a separate child process 
+Cluster: => Fork the process and create the multiple servers based on no of CPUs available in the system. This is used to fully occupy the CPU cores and space of a multicore system. 
+Master and worker processes can send messages to each other using worker.send(message) and process.on('message', callback)
+spawn(): => spawn is like a fork that is created as a separate process but along with command to execute as a separate process. The commands could be ls, dir, cp, copy, npm, git, echo, cd
+
+const cluster = require('cluster');
+const http = require('http');
+const numCPUs = require('os').cpus().length;
+
+if (cluster.isMaster) {
+  console.log(`Master ${process.pid} is running`);
+
+  // Fork worker processes based on the number of CPU cores
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  // Handle worker process events
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`Worker ${worker.process.pid} died`);
+  });
+} else {
+  // Worker processes create HTTP server and handle requests
+  http.createServer((req, res) => {
+    res.writeHead(200);
+    res.end('Hello, World!\n');
+  }).listen(8000);
+
+  console.log(`Worker ${process.pid} started`);
+}
+
+Functions having Higher Priority:
+1. process.nextTick
+2. Promise.resolve
+3. setTimeout
+4. setImmediate
+process.nextTick() is a special function that allows you to schedule a callback function to be invoked in the next iteration of the event loop, immediately after the current operation completes. It's often used to defer the execution of a function until the current call stack has cleared, allowing for more efficient asynchronous programming.
+
+Scale Node JS Application: Vertical Scaling (Upgrading Hardware), Horizontal Scaling (), Load Balancing (distribute incoming requests across multiple instances of your Node.js application), 
+Babel-loader: Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards-compatible version of JavaScript that can be run in older browsers or environments
+Babel Presets:
+* @babel/preset-env: Automatically determines the Babel plugins and polyfills you need based on your target browser environments or Node.js version.
+* @babel/preset-react: Adds support for JSX and other React-related synta
+
+webpack webpack-cli: packages used to bundle node js based on the configurations written in webpack.config.js
+
+Microservice Architecture => High Cohesive (all code base in a single place) and Loosely coupled (they can be communicated with each other)
+It can be communicated within itself using GraphQL, REST APIs, Event Driven Architecture, Kafka, RabbitMQ
+
+Cross-browser development=> It refers to the practice of creating web applications or websites that work consistently across different web browsers.
+Singleton design pattern => It is allowing only one instance of the class. If we try to create 2nd instance it will again return the first instance if already have it. It will use only first instances class variable even though you call it with second instance. Refer code in javascript-demo
+Use purpose of Singleton design pattern => Global State Management (t can hold and manage global state variables, configurations, or resources), Resource Sharing (It facilitates sharing of resources such as database connections, file system access, network connections, and other expensive resources)
+Promise.all() => When one rejects all of it will be rejected. It will wait for other promise to be fulfilled.
+Promise.allSettled() => If any promise rejected then everything will not be rejected. Fulfilled promise will be resolved and failed promise will be rejected. It is useful when one promise result is independent with other. Response will be in a single array with each Promise value in different objects.
+Promise.race(): It will take array of promises and return only one promise which is resolved first.
+Lexical Scope: JavaScript follows a lexical scoping model, meaning that the scope of a variable is determined by its location within the code at the time of its declaration.
+
+Solid Principle: 
+Single Responsibility Principle (SRP):
+* In Node.js, this principle can be applied to functions, modules, or classes. Each should have a single responsibility or concern.
+Open/Closed Principle (OCP)
+  In Node.js, this means that existing code should be extendable without modifying it.
+Liskov Substitution Principle (LSP):
+  In Node.js, this principle ensures that derived classes can be substituted for their base classes without altering the correctness of the program. It's about maintaining the expected behavior when swapping one implementation for another.
+Interface Segregation Principle (ISP):
+  In Node.js, this principle encourages creating smaller, specific interfaces rather than large, general ones. It helps in keeping modules or classes focused and prevents clients from depending on methods they don't need.
+Dependency Inversion Principle (DIP):
+  High-level modules should not depend on low-level modules. Both should depend on abstractions.
+
+Streams: writing to a source in a continuous fashion, chunk by chunk
+Set delay on Kafka: You can delay Kafka message by sending acknowledgement to the producers through the message consumer.commitOffsets
+ Key features of Playwright:
+    • Cross-browser support
+* Headless and headful modes
+* Granular control over browser behavior
+* Support for parallel execution
+* Built-in support for waiting for elements and network requests
+ "selectors" in Playwright:
+  Includes CSS selectors, XPath, and text selectors, page.$(), page.$$(), and page.waitForSelector() to find elements using selectors
+
+ChildProcess Module: Using child process module in Node JS you can fork or spawn the existing process and run any background task parallely. It may not create a new process like cluster but it will split the existing process (run as the sub process) to execute any independent code asynchronously like Kafka, Cron Job etc., 
+
+Cluster vs Child Process Difference: In cluster each worker process serves incoming HTTP requests independently whereas whereas child process is used to Child processes are commonly used for tasks such as executing shell commands, running background tasks, processing large datasets in parallel, or executing code in different programming languages.
+
+Clustering is a technique used to horizontally scale a Node.js server on a single machine by spawning child processes (workers) that run concurrently and share a single port. It distributes the incoming connections across all the available worker processes so that available CPU cores are utilized to their full potential. It uses Round Robin approach to distribute tasks among workers.
+
+Chaining in Node JS: Chaining in Node.js typically refers to chaining asynchronous operations together in a readable and concise manner. This is often done using promises or async/await syntax.
+
+Design Pattern in Node JS: (  https://medium.com/@techsuneel99/design-patterns-in-node-js-31211904903e)
+  Singleton Pattern: The Singleton pattern ensures that a class has only one instance and provides a global point of access to it.  For instance, a database connection pool can be implemented as a singleton to prevent resource wastage.
+  Factory Pattern: The Factory pattern offers a way to create objects without specifying the exact class of object that will be created. By abstracting object creation, the Factory pattern enhances code readability and reusability. In a Node.js context, this can simplify object creation, especially when dealing with asynchronous operations such as reading files or making API calls.
+  Observer Pattern:  This pattern involves a Class that maintains a list of its dependents, called observers, and notifies them of any state changes. In the context of Node.js, this can be leveraged to build event-driven systems, such as real-time applications and chat applications.
+  Middleware Pattern: 
+  Module Pattern
+  Decorator Pattern: Decorators dynamically add new functionality to objects without affecting other instances. This is ideal for extending core modules in Node.
+  Promise pattern
+  Dependency Injection:  design pattern to facilitate loose coupling between components and improve code maintainability, scalability, and testability.rather than a component creating its dependencies directly, the dependencies are provided (injected) from external sources. Constructor Injection, Property Injection:, Method Injection:
+
+
+PUT vs POST: Put is idempotent meaning that multiple identical requests should have the same effect as a single request, POST is non-idempotent. PUT cache the response, POST can’t cache the response.
+Cookies vs Session storage: Cookies are smaller storage and it is sent to server for every request and it’s data persists in browser. Session storage are larger and will vanish if the URL is closed.
+
+LLD involves Module Structure, API Interaction (Gateways and Services), Data Processing (Model - Business Logic), Error Handling, Dependencies, Testing
+HLD: System Architecture (MVC, Microservices Architecture), Components and Modules (interfaces between components and the interactions between them), Data Flow and Control Flow, External Interfaces, Deployment Architecture, Performance and Scalability, Error Handling and Logging, Testing and Quality Assurance
+
+https://anywhere.epam.com/en/blog/advanced-node-js-interview-questions-answers
+https://www.simplilearn.com/tutorials/nodejs-tutorial/nodejs-interview-questions - Advanced Node JS
+
+Redis: Redis refers to an open-source, in-memory data store that is commonly used as a database, cache, and message broker.
+How redis is working fast: In-Memory Storage-RAM, Data Structures - Optimized Data Structures like strings, lists, sets, sorted sets, hashes, bitmaps, and hyperloglogs, Single-Threaded Design, Non-blocking I/O, Persistence Options like Snapshots (RDB) - Redis can take point-in-time snapshots of the dataset and save them to disk. This operation is performed in the background without blocking the main thread. Append-Only File (AOF) - Redis can log every write operation to an append-only file, which can be replayed to rebuild the dataset, Memory Optimization -Redis uses efficient data encoding techniques to minimize memory usage. For example, small integers are encoded in a compact format. 
+
+async_hooks: Async Hooks is a feature in Node.js that allows developers to monitor the lifetime of asynchronous resources such as Promises, Timers. It provides a set of hooks that enable you to track the creation, execution, and destruction of asynchronous resources within your Node.js applications.
+
+Libuv is a multi-platform C library that provides support for asynchronous I/O based on event loops and file-system and Timers and Event Handling. Event Loop: The event-driven architecture that allows Node.
+ThreadPool: The thread pool in Node.js is implemented using the libuv library. A thread pool is a group of worker threads separate from the main event loop thread Node.js uses to execute JavaScript code and handle requests. They are used to perform certain types of tasks that can be slow and blocking, such as reading or writing to a file, performing cryptographic functions, etc. 
+The default size of the thread pool varies depending on the version of Node.js and the platform (operating system).
+As of recent versions of Node.js, the default size of the thread pool is typically around 4 threads per CPU core. Thread poolside can be changed in Node js env file UV_THREADPOOL_SIZE=8
+
+Worker processes are instances of the same Node.js application (the same script file). Each worker runs in its own process, utilizing a separate CPU core.
+The master process manages communication with worker processes. It distributes incoming connections (or tasks) among workers using a round-robin algorithm by default.Workers can communicate with the master process and with each other using inter-process communication (IPC) mechanisms provided by Node.js, such as process.send() and process.on('message', handler).
+Global Exception in Node JS: (1) Process-wide 'uncaughtException' Event: Node.js provides a process-wide event called 'uncaughtException', which is emitted when an unhandled exception occurs in your application. process.on('uncaughtException', (err) => {})
+(2)'unhandledRejection' Event:  Similarly, Node.js provides an event called 'unhandledRejection', which is emitted when a Promise is rejected but no catch handler is attached to handle the rejection. process.on('unhandledRejection', (reason, promise) => {})
+Block event loop in Node JS: Infinite Loop, Synchronous File Read, Blocking with CPU-Intensive Computation, Blocking with child_process (Child process runs as the separate process, but if it takes expensive computation and CPR utilisation then main thread will lag)
+
+Disadvantages of Microprocessor: Increased Complexity, Distributed System, Data Consistency, Configuration Management, End-to-End Testing, Redundancy, Versioning (Managing dependencies and ensuring compatibility between different versions of services can be challenging), Library and Framework Upgrades
+
+Session-based Authentication: As usual user is authenticated in server, once authenticated session id is created for the particular user with basic details like user name and email. The session id is sent in response set-cookie to set in cookie as http only. Next time when API hit, session id is sent over cookie in http request and it’s expiry time is validated in server. Session in server is configured such as it’s expiry time is saved. So each session’s expiry time is validated.  app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: true, // Set to true if using HTTPS
+    maxAge: 24 * 60 * 60 * 1000 // Session expiry time (24 hours)
+  }
+}));
+It checks if the session ID exists and retrieves session data from the session store using req.sessionStore.get().
+
+Oath: OAuth (Open Authorization) is a standard protocol for authorization that allows users to grant third-party websites or applications limited access to their resources without sharing their credentials directly. Use Cases: (1) Third-Party Authentication, (2) API Authorization, (3) Single Sign-On (SSO) OAuth Flow: (1) Authorization Request (2) User Authentication (3) Authorization Grant (4)Access Token Request (5)Access Token Issuance (6)Access Protected Resources
+
+Webpack Bundle Configurations:
+  Entry File, Output folder, Loaders (Transformations applied to the source code of modules. They preprocess files as they are imported. Common loaders include babel-loader for JavaScript/JSX and css-loader for CSS files.),  HtmlWebpackPlugin (Uses: Automatic HTML File Generation like dynamic changing of HTML templates in React JS, Script Injection, Template Handling like EJS, Pug, or a simple HTML file, Minification), Mode (Specifies the mode in which Webpack runs. It can be either development or production, development mode is optimized for debugging and fast build times., production mode is optimized for performance and smaller bundle sizes)
+Database:
+1. Types of Indexes in MongoDB:
+  Single Field Index: Single field indexes collect and sort data from a single field in each document in a collection.
+  Compound Index: Compound indexes collect and sort data from two or more fields in each document in a collection. Data is grouped by the first field in the index and then by each subsequent field.
+  Multikey Index: Multikey indexes collect and sort data stored in arrays. MongoDB automatically sets the index to be a multikey index.
+  Text Index: Text indexes support text search queries on fields containing string content.  Text indexes improve performance when searching for specific words or phrases within string content.
+    db.<collection>.createIndex(
+      {
+            <field1>: "text",
+            <field2>: "text",
+         .  ..
+      }
+    )
+  Hashed Index: Hashed indexes collect and store hashes of the values of the indexed field.
+  TTL (Time-To-Live) Index: A TTL index automatically removes documents from a collection after a certain amount of time.
+2. Types of Indexes in MySql:
+  Single-Column Index
+  Composite Index (Multi-Column Index)
+  Unique Index
+  Primary Key Index
+  Hash Index
+3. Clustered Index: Only one that is primary key index. Rows are actually arranged in the order or index key. Used to select the specific row using where cond.
+4. Non-cluster Index: All indexes other than PK index. Maintains it’s own Data structures to retrieve the data. Filtering, Sorting all actions are done using non-clustered index, DS actions.
+￼
+Index Performance in DB: Index value can either stored in B-tree with a balanced tree structure or in a Hash table which store the indexed column values in a hash table data structure. When the query is executed, For B-tree indexes, MySQL typically performs a binary search or similar algorithm to quickly find the index value in tree, For hash indexes, MySQL performs a hash lookup operation. Once the index is found it will fetch it’s corresponding row or document from its reference without scanning the entire table. 
+
+Two index in DB: If there are two indexes then each index will take its referenced value and finally the results will be merged and fetched
+
+Difference between SP and functions: 
+  1. Transaction Control will be available in SP but not in Functions, 
+    2. SP accept input, output parameters, functions accept only input parameters
+    3. Functions can be called anywhere like Select statement, where condition etc., SP can be called individually or via code
+    4. SP can modify the data in DB, functions don’t have control over the database
+
+Replica in MongoDB: Replica is duplicating same data across multiple servers. It will take multiple copies across servers. Replica provides 24*7 availability of data. Protection from single server loss, hardware failures and service interruptions. Ensures that data is available to every client. MongoDB structure consists of one primary node and that primary node is connected with multiple secondary nodes. All read/write operations are performed in the primary node and it is updated in secondary node every time. Primary node will send heartbeat signal to all secondary nodes periodically. If secondary node didn’t receive signal then the primary node is considered as failure and any one of the secondary node elects any one of them as primary. If the failed primary node rollbacked again, then it will act as the secondary node. A replica set requires min. Of 3 nodes including primary node and max of 50 nodes. Advantages: Replication helps in disaster recovery and backup of data, Improve application reliability, Replication minimises downtime for maintenance, Load balancing is achieved. Disadvantages: Higher cost and time constraints, Redundant data is stored so more space and server processing is required.  
+The mongos acts as a query router, providing an interface between client applications and the sharded cluster. Config servers store metadata and configuration settings for the cluster. As of MongoDB 3.4, config servers must be deployed as a replica set (CSRS). MongoDB uses the shard key to distribute the collection's documents across shards. The shard key consists of a field or multiple fields in the documents.
+
+Partitioning in MySQL is used to split or partition the rows of a table into separate tables in different locations, but still, it is treated as a single table. It distributes the portions of the table's data across a file system based on the rules we have set as our requirement. Horizontal Partitioning (rows) Vertical Partitioning (columns-mysql doesn’t support). 
+Types: 1. RANGE Partitioning 2. LIST Partitioning 3. HASH Partitioning (In other words, it splits the table as of the value returned by the user-defined expression. It is mainly used to distribute data evenly into the partition. It is performed with the PARTITION BY HASH(expr) clause.) 4. Partition by Key : It is similar to the HASH partitioning where the hash partitioning uses the user-specified expression, and MySQL server supplied the hashing function for key
+
+Handle two requests at the same time: Database Transactions:  ensure that each order is processed atomically, Timestamping, Optimistic Locking: Commit while one process is in transaction  If a conflict is detected, the transaction can be retried or aborted.
+
+Normalisation:
+1NF: Each column contains atomic (indivisible) values,  Each column contains values of a single type, Each column has a unique name, The order in which data is stored does not matter.
+2NF: All non-key attributes are fully functionally dependent on the primary key (i.e., there are no partial dependencies). A partial dependency occurs when a non-key attribute is dependent on only a part of the composite primary key (when the primary key consists of more than one column). Eg., if there are two columns as combination unique, customer id and order id but if you have one more column customer name which is only dependent on the customer id then there occurs a partial dependency.
+3NF: All the attributes are functionally dependent only on the primary key (i.e., there are no transitive dependencies). A transitive dependency occurs when a non-key attribute is dependent on another non-key attribute. 
+| StudentID | StudentName | CourseID | CourseName | Instructor |
+|-----------|-------------|----------|------------|------------|
+| 1         | John Doe    | 101      | Math       | Mr. Smith  |
+| 1         | John Doe    | 102      | Physics    | Dr. Jones  |
+| 2         | Jane Smith  | 103      | Biology    | Ms. Clark  |
+| 2         | Jane Smith  | 104      | Chemistry  | Dr. Brown  |
+Here, CourseName and Instructor are transitively dependent on CourseID.
+
+Components of MySQL Cluster
+1. Management Node (ndb_mgmd):
+    * The management node handles cluster configuration, management, and monitoring. It coordinates the startup and shutdown of other nodes in the cluster.
+2. Data Nodes (ndbd or ndbmtd):
+    * Data nodes store the actual data and handle data processing. They are responsible for data storage, retrieval, and replication.
+3. SQL Nodes (mysqld):
+    * SQL nodes run the MySQL Server and provide the SQL interface to the cluster. They process SQL queries and interact with data nodes to fetch and manipulate data.
+4. API Nodes:
+    * API nodes use the NDB API to access the data directly. These nodes are useful for applications that require high performance and low latency.
+Use Cases for MySQL Cluster
+* Telecommunications: For real-time subscriber data management and call routing.
+* Financial Services: For high-speed transaction processing and real-time fraud detection.
+* E-commerce: For managing product catalogs, customer data, and real-time inventory management.
+* Gaming: For real-time user data management and game state storage.
+Why MySQL Cluster: High availability ensures that subscriber data is always accessible, while horizontal scalability allows the system to handle millions of subscribers. Real-time performance is crucial for low-latency operations like call setup and messaging.
+Real-time data processing capabilities allow for immediate detection of suspicious activities through the following mechanisms. Continuous Data Ingestion
+* Mechanism: Real-time data processing systems continuously ingest data from various sources, such as transaction logs, user activities, and sensor inputs.
+* Benefit: This ensures that data is available for analysis as soon as it is generated, without delays associated with batch processing.
+Code to Create nodes in cluster
+* Update the MySQL Cluster configuration file (config.ini or similar) on the management node (ndb_mgmd) to include the new nodes. This file typically resides in /var/lib/mysql-cluster.
+
+[ndb_mgmd]
+NodeId=1
+HostName=mgm-node-1
+
+[ndbd]
+NodeId=2
+HostName=data-node-1
+DataDir=/var/lib/mysql-cluster
+
+[ndbd]
+NodeId=3
+HostName=data-node-2
+DataDir=/var/lib/mysql-cluster
+
+[mysqld]
+NodeId=4
+HostName=sql-node-1
+
+# Restart management node with updated configuration
+ndb_mgmd -f /var/lib/mysql-cluster/config.ini
+
+# Initialize and start new data node
+ndbd --initial
+
+# Start MySQL server on new SQL node
+mysqld --ndbcluster --ndb-connectstring=mgm-node-1
+
+# Check cluster status
+ndb_mgm -e show
+
+
+Types of Locks in MySQL:
+1. Shared Locks (LOCK IN SHARE MODE):
+    * Allows multiple sessions to read a row simultaneously.
+    * Prevents other sessions from acquiring an exclusive lock on the same row until all shared locks are released.
+2. Exclusive Locks (FOR UPDATE):
+    * Allows a session to update or delete a row.
+    * Prevents other sessions from acquiring any type of lock (shared or exclusive) on the same row until the exclusive lock is released.
+
+Syntax and Examples:
+1. Shared Locks (LOCK IN SHARE MODE):
+
+-- Start a transaction
+START TRANSACTION;
+
+-- Select rows with a shared lock
+SELECT * FROM table_name WHERE condition FOR SHARE;
+
+-- Perform other operations within the transaction
+-- ...
+
+-- Commit the transaction to release locks
+COMMIT;
+
+2. Exclusive Locks (FOR UPDATE):
+
+-- Start a transaction
+START TRANSACTION;
+
+-- Select rows with an exclusive lock
+SELECT * FROM table_name WHERE condition FOR UPDATE;
+
+-- Perform updates or deletes within the transaction
+UPDATE table_name SET column1 = value1 WHERE condition;
+DELETE FROM table_name WHERE condition;
+-- ...
+
+-- Commit or rollback the transaction to release locks
+COMMIT;
+-- or ROLLBACK;
+
+Using FOR UPDATE without a transaction can lead to potential concurrency issues and performance degradation, especially in high-traffic applications. It's crucial to release locks promptly to minimize contention and ensure application responsiveness. The lock acquired with FOR UPDATE remains held until the transaction is either committed or rolled back. This means it's not released automatically at the end of the SELECT statement.
+
+MySQL Pooling: MySQL Pooling, or MySQL Connection Pooling, is a technique used to manage and reuse database connections efficiently. Instead of creating a new database connection every time one is needed, a pool of connections is maintained and reused, which can significantly improve the performance and scalability of database applications.
+  const pool = mysql.createPool({
+    connectionLimit: 10, // Maximum number of connections to create at once
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
+    database: 'mydatabase'
+  });
+Why Pooling: Establishing a new database connection is a resource-intensive operation. It involves several steps like network communication, authentication, and initialization. By reusing connections, the pool minimizes the overhead associated with these steps.
+Disadvantages if we don’t use Pooling: Concurrency Issues like Sequential Processing, Blocking and Resource Management issues like Resource Contention and Connection Limits, Error Handling and Recovery like Single Point of Failure, Limited Scalability, Increased Latency.
+Benefits of Connection Pooling
+  Parallel Processing, Optimized Connections, Reduced Latency, Error Handling, Load Balancing
+
+Sequelize ORM: In Node.js, one of the most popular Object-Relational Mapping (ORM) libraries used with MySQL is Sequelize. Sequelize is a powerful and feature-rich ORM for Node.js that supports various SQL dialects, including MySQL, PostgreSQL, SQLite, and MSSQL.
+Steps in Sequelize:
+1. Model Creation
+2. sequelize.authenticate()
+3. sequelize.sync({ force: true }) // Use { force: true } to drop and re-create tables
+4. await User.create({ username: 'john', email: 'john@example.com' })
+5. await User.findAll();
+6. await User.findOne({ where: { username: 'john' } });
+7. await User.findOne({ where: { username: 'jane' } });
+Key Features of Sequelize is Model Definition, Data Mapping (Map JavaScript objects to database tables and vice versa), Associations(Define relationships between models (e.g., one-to-one, one-to-many, many-to-many).), Query Building, Transactions, Migrations
+
+ACID:
+Atomicity - Ensures that a transaction is treated as a single "atomic" unit, which either completes in its entirety or not at all.
+Consistency - Ensures that a transaction brings the database from one valid state to another, maintaining database rules and constraints. - account balance cannot be negative - DB Contraint
+Isolation - Ensures that concurrent transactions do not interfere with each other. Transactions are isolated from each other until they are completed, preventing temporary inconsistencies.
+Durability - Ensures that once a transaction is committed, it will remain so, even in the case of a system failure. Committed data is permanently recorded.
+
+
+HTTPS: 
+1. Browser connects to a web server (website) secured with SSL (https). Browser requests the server identify itself.
+2. Server sends a copy of its SSL Certificate, including the server's public key.
+3. Browser checks the certificate root against a list of trusted CAs and make sure the certificate is unexpired, unrevoked, and its common name is valid for the websiUKte that it is connected to. If the browser trusts the certificate, it creates, encrypts, and sends back a symmetric session key using the server's public key.
+4. Server decrypts the symmetric session key using its private key and sends back an acknowledgement encrypted with the session key to start the encrypted session.
+5. Server and Browser now encrypt all transmitted data with the session key.
+
+TCP                       HTTPS
+Transport Layer                 Application Layer Establishes connection using 3 way handshake    HTTPS is built over TCP which ensures encryption using public key and create session key and decryption using private key and all after
+SYN, SYN-ACK, ACK               three way of handshake
+
+
+AWS:
+Lamda: It allows you to run code without provisioning or managing servers. You simply upload your code, and Lambda takes care of everything required to run and scale your code with high availability. Serverless Computing, Auto-Scaling, Pay-per-Use Pricing Model, Integration with Other AWS Services
+  When Triggered: Lambda functions are triggered by various events such as changes to data in Amazon S3 buckets, updates to DynamoDB tables, HTTP requests via API Gateway, or custom events sent from other AWS services or your own applications.
+"ghcr" stands for GitHub Container Registry. It is a Docker container registry provided by GitHub, allowing users to store, manage, and distribute Docker images within the GitHub ecosystem.
+S3 Versioning and S3 Object Lock: S3 Versioning allows you to keep multiple versions of an object in the same bucket, which can help protect against accidental deletions or overwrites. S3 Object Lock, on the other hand, is used to prevent objects from being deleted or overwritten for a specified period of time.
+Access only from a specific VPC?: u can secure an S3 bucket to allow access only from a specific VPC by creating a VPC endpoint for S3 and configuring a bucket policy that grants access only to requests coming from that VPC endpoint.
+Kafka:
+What is an Offset?
+An offset is a unique identifier for each record within a Kafka partition. It represents the position of a record in the partition.
+Values for auto.offset.reset
+The auto.offset.reset setting can take one of the following values:
+1. earliest: When the consumer does not have a valid offset, it starts reading from the earliest available message in the partition. This means that the consumer will read all the messages from the beginning of the log.
+2. latest: When the consumer does not have a valid offset, it starts reading from the latest message in the partition. This means that the consumer will only read new messages that are produced after the consumer starts.
+3. none: If there is no previously committed offset for a partition, the consumer will throw an exception and stop. This is useful if you want to ensure that the consumer has explicitly set offsets and do not want to accidentally start reading from an unintended point.
+You can use Kafka Streams also to broadcast a message other than normal producer.send(). 
+The metadata.broker.list configuration in Kafka is used to specify the initial set of Kafka brokers (also known as bootstrap servers) that a Kafka client (producer or consumer) will use to connect to the Kafka cluster.
+
+Check with answers of athaenahealth questions
+
+TechStacks used and Why
+Go through project structure diagram 
+Review PDF-gen code
+Screenshots
+Oath 
+
+
+Web hooks
+Nginx, reverse proxy, your domain is hosted at a particular port how will you proxy your server to the particular domain
+
+
+
+Practical Application to set cookie
+
+Static code Analyzer
+Build chat application in Node JS - How authentication is performed for every chats?
+
+
+Custom hooks vs normal function
+
+
+var Employee = {
+  company: 'xyz'
+}
+var emp1 = Object.create(Employee);
+delete emp1.company
+console.log(emp1.company);
+
+
+
+Questions on s3, Kafka and Lamda
+Tools to manage error logs
+
+
+Does web socket needs authentication?
+Exp more about session in Node js and sending the token over cookie in web socket. 
+
+
+
+Restuarants 
+Id(PK)      Name     
+1           XXX       
+
+
+Menu 
+Id      Name     RestuarantId       Price
+1       Idly        1               
+2       Dosa        2
+3       Idly        2
+
+
+User 
+Id      Name        Address     Age        Gender           
+
+
+Cart 
+Id      MenuId      UserId    OrderId     Quantity
+1        1          1                         2 
+2        2          2           
+3        1          1           
+
+
+Order
+Id      UserId      RestuarantId       
+1       1           1    
+ 
+https://www.simplilearn.com/tutorials/nodejs-tutorial/nodejs-interview-questions
+Write a code to steam read file, steam download file and append
+Express JS Code
+Fs, os module
+How automatic scaling is done
+Read a large file by streaming
+
+  
