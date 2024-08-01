@@ -1,0 +1,86 @@
+React JS:
+How will you reuse a component ?
+Virtual DOM.
+	What Exactly Gets Compared:
+		Element Types
+		Attributes/Props
+		Text Content
+		Child Nodes - Use DFS Approach to check cild nodes effectively.
+	Virtual DOM Memory:
+		Diffing Algorithm: React employs a highly optimized diffing algorithm to compare the new VDOM with the old VDOM.
+		Batching Updates: React batches multiple state updates together, reducing the number of times the VDOM needs to be re-rendered and compared.
+		Reconciliation: During the reconciliation process, React updates only the parts of the real DOM that have changed.
+		Lightweight Representation: It omits many of the complex parts of the actual DOM (like event listeners and extensive attributes), focusing only on the minimum necessary information (element types, attributes, and children).
+		Garbage Collection:JavaScript engines have efficient garbage collection mechanisms that can handle the creation and deletion of VDOM trees.
+
+Why React? 
+Second argument that can optionally be passed to useState?
+Second argument that can optionally be passed to useEffect?
+What ll you choose? Class or Functional Component
+Purpose of super(props) in constructor?
+useEffect => ComponentDidUnMount (Practical)
+Difference between export default vs export 
+HOC : Real time scenario  => logging, error handling, or performance tracking, Encapsulation of Behavior, Separation of Concerns
+Pure Components vs Components
+Context API's : Alternative for Redux => Avoid Props Drilling, Properties like theme colour if changes in one place it will be automatically consumed in all places
+how to communicate the parent component from child component => Callback Functions, useRef
+Write Class Component skeleton (Practical)
+Write Controlled Form with one field (Practical)
+Diff between browser router and hash router
+Thunk
+How can we prevent loading of large amount of data in a HomeComponent Ans : (Redux)
+Snippets
+How to handle token in Front end
+Redux: Predictable State Management, Centralized State, Consistency Across Environments,  Managing complex state in large applications, Server-side Rendering, 
+How SSR (Server Side Render) Works in React: (1) Request to Server (2) Render on Server (3) Send HTML to Client (4) Hydration 
+Benefits of SSR : (1) Improved SEO (2) Faster Initial Load (3) Social Media Sharing
+How useContext with useReducer is replacement of Redux? => useReducer will provide state and dispatch, we can pass this state and dispatch via provider from the home component to all child components, Hence the child components if want to do some operation it can consume dispatch operation. This workflow is used is less complex applications. This doesn’t support middleware like thunk.
+
+Reat 18 features:
+1. Concurrent Rendering : const [isPending, startTransition] = useTransition();
+2. Automatic Batching of Updates => Don’t re-render continuously for two continuous state updates
+3.  useServerData custom react hook => will fetch the data from cache based on key if already available instead of doing API call
+4. Improved Suspense API => Gives the fallback params where we can place loader until promise resolves.
+5. Built-in Transitions and Animations
+
+Redux toolkit
+How will you make state variables as mutable in Redux => Using produce function from immer library, or you can copy the state object directly and make changes. 
+	By default Redux behaves Im-mutably and changing it to mutably may lead to performance, debugging issues. Can’t maintain ore and next state etc., 
+	Changing it to mutably means updating the state value directly and returning in reducer without making it copy
+	
+How will you optimise project? - Code Splitting (Suspense API, Lazy loading), useTransition, Redux, useMemo, useCallback, Webpack Bundle Analyzer (Checks which module occupies more size in bundle using graph, chart etc., ), Automatic batching updates, Tree Shaking Difficulties faced on Project? 
+How will you prevent multiple re-rendering in React JS? 
+
+React.StrictMode ? - (1) Identify and warn about deprecated methods, (2) Warn about multiple re-rendering happens through API call, (3) It warns about the usage of legacy string refs (ref="myRef") instead of callback refs (ref={myRef => this.myRef = myRef}), which are the recommended approach for accessing DOM elements in modern React applications
+Get prev State of state variable, (4) It will warn about the case sensitivity of event handlers,(5) warn about unsafe practice such as API call directly inside render method.
+
+How will you handle error in another way? - Having Error Boundary Component, it will catch error using the lifecycle method called componentDidCatch. Error Boundary Component is wrapped around component and if any error occurs at the child component, it will start propagate searching for nearest componentDidCatch and it will render that error component’s UI. Or using inbuilt ErrorBoundry component from react-error-boundary library to support fallback UI in functional component. Or you can write componentDidCatch In class component and Wrap it over functional component to catch error using HOC.	
+
+Service Worker in React JS:
+A service worker is a type of web worker that acts as a programmable proxy between your web application and the network. It runs in the background, separate from the main browser thread, and can intercept network requests, cache resources, and provide offline support for web applications. It can be implemented using create react app automatically or by manual integration by adding window.addEventListener('load', manual integration. 
+Service Worker are used to Background Processing, Network Interception, Offline Support, Push Notifications and Progressive Web Apps (PWAs)
+useRef: Used to take reference of either child component or any html tag to access it’s element. If it is a reference of Child component, then all the values and html tags of child component can be accessible in parent
+useRef along with forwardRef: forwardRef is a wrapper function or HOC in child component which forward’s the child component’s elements to the parent component. Parent component access it’s element using useRef. The diff bet. Prev and this is, in case of forward Ref, we will get the ref as props from parent component, and we could choose which element could be referred from the child component by referring the element with the ref props. 
+
+Ready 18 Hooks: 
+* useImperativeHandle - useImperativeHandle is a React hook that allows you to customize the value that is exposed by a component when it is used with ref. It is particularly useful when you're working with functional components and you want to expose only certain methods or properties of the component's instance to its parent component.
+* useLayoutEffect - useLayoutEffect is a React Hook that is similar to useEffect, but it runs synchronously after all DOM mutations. This makes it suitable for operations that need to be performed after the DOM has been updated but before the browser paints the screen.
+* useDebugValue - useDebugValue is a React Hook used for debugging purposes. It allows you to display custom labels for custom hooks in React DevTools. This can be helpful when you're working with custom hooks and want to provide additional information about their state or behavior. Eg.,   useDebugValue(loading ? 'Loading...' : `Data: ${data}`); before returning hook
+* useDeferredValue - It allows you to delay updating a value until a specified time has passed, enabling smoother transitions and better performance by deferring less critical updates.
+This hook is particularly useful for optimizing user interfaces and prioritizing updates based on their importance. By deferring less critical updates, you can ensure that more critical updates are processed first, leading to a more responsive and efficient user experience.
+	const [text, setText] = useState('');
+	  const deferredText = useDeferredValue(text, { timeoutMs: 1000 });
+  	const handleChange = (event) => {
+    		setText(event.target.value);
+  	};
+* useTransition
+* useId - Custom hook which we can use to create unique id fr either different components or html tag elements or elements inside loop. Uniqueness of the id is maintained by taking previous reference of the value. 
+React.memo() is an alternative for shouldComponentUpdate in functional component: If you wrap your functional component inside React.memo() whenever you update state variable in functional component if it’s value doesn’t change then the component won’t be re-rendered. This simulates the behaviour of shouldComponentUpdate. Also when you wrap child component inside React.Memo child re-rendering won’t occur when parent’s state variable is updated.
+useRef()
+If a reducer dispatches an action in Redux, it would lead to an infinite loop or a stack overflow error. If a reducer dispatches an action, it would disrupt this flow and cause an infinite loop because each dispatched action would trigger the reducer again, leading to another dispatch, and so on.
+useMemo vs useCallback: useMemo is used for memoizing the result of a computation, while useCallback is used for memoizing a function instance. They both accept an array of dependencies as the second argument to determine when to recalculate or recreate the memoized value or function.
+Microfrontend: Microfrontends is an architectural style where a front-end application is decomposed into individual, semi-independent "micro" applications, each responsible for a specific feature or section of the overall UI. Implementation Strategy can either be  Build-Time Integration or Run-Time Integration. Implementation example: 1. Using iframes, 2. Single SPA, 3. Module Federation (Webpack 5) - ModuleFederationPlugin. It can be communicated using  Custom Events, Shared State (Using a shared state management solution like Redux or Context API), 
+React Router Sending data:
+1. Using state: <Link to={{ pathname: '/componentB', state: data }}> || And receive it using hooks useLocation=> location.state
+2. Using useContext: Create a global context and wrap as provider in routing. Set the provider data in componentA and consume the data in componentB. 
+Create Timer in React JS

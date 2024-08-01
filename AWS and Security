@@ -1,0 +1,118 @@
+AWS:
+Lamda: It allows you to run code without provisioning or managing servers. You simply upload your code, and Lambda takes care of everything required to run and scale your code with high availability. Serverless Computing, Auto-Scaling, Pay-per-Use Pricing Model, Integration with Other AWS Services
+	When Triggered: Lambda functions are triggered by various events such as changes to data in Amazon S3 buckets, updates to DynamoDB tables, HTTP requests via API Gateway, or custom events sent from other AWS services or your own applications.
+"ghcr" stands for GitHub Container Registry. It is a Docker container registry provided by GitHub, allowing users to store, manage, and distribute Docker images within the GitHub ecosystem.
+S3 Versioning and S3 Object Lock: S3 Versioning allows you to keep multiple versions of an object in the same bucket, which can help protect against accidental deletions or overwrites. S3 Object Lock, on the other hand, is used to prevent objects from being deleted or overwritten for a specified period of time.
+Access only from a specific VPC?: u can secure an S3 bucket to allow access only from a specific VPC by creating a VPC endpoint for S3 and configuring a bucket policy that grants access only to requests coming from that VPC endpoint.
+Kafka:
+What is an Offset?
+An offset is a unique identifier for each record within a Kafka partition. It represents the position of a record in the partition.
+Values for auto.offset.reset
+The auto.offset.reset setting can take one of the following values:
+1. earliest: When the consumer does not have a valid offset, it starts reading from the earliest available message in the partition. This means that the consumer will read all the messages from the beginning of the log.
+2. latest: When the consumer does not have a valid offset, it starts reading from the latest message in the partition. This means that the consumer will only read new messages that are produced after the consumer starts.
+3. none: If there is no previously committed offset for a partition, the consumer will throw an exception and stop. This is useful if you want to ensure that the consumer has explicitly set offsets and do not want to accidentally start reading from an unintended point.
+You can use Kafka Streams also to broadcast a message other than normal producer.send(). 
+The metadata.broker.list configuration in Kafka is used to specify the initial set of Kafka brokers (also known as bootstrap servers) that a Kafka client (producer or consumer) will use to connect to the Kafka cluster.
+
+
+Security:
+Cross Site Scripting: When an attackers script is executed in the browser is known as XSS. It can be done through query params of the url. The attacker will attach their own script in query params and make user to hit the malicious url so that their script will be executed
+Types:
+1. Stored XSS Example: If we are storing comment field directly in DB and fetching it in front end in any templates then if that comments field contains malicious script it also will be fetch and executed in front end.
+2. Reflected XSS Example: Reflected XSS occurs when user input is immediately reflected back to the user in the response from the server.
+    1. <div> 
+        1. <p>Search results for: <%= req.query.query %></p> 
+        2. <!-- Display search results --> 
+        3. </div> 
+        4. Malicious URL: https://example.com/search?query=<script>alert('XSS');</script>
+3. DOM-based XSS Example: DOM-based XSS occurs when the vulnerability is in the client-side code rather than the server-side code.
+<html>
+<body>
+  <div id="content"></div>
+  <script>
+    document.getElementById('content').innerHTML = location.hash.substring(1);
+  </script>
+</body>
+</html>
+Malicious URL: https://example.com/#<script>alert('XSS');</script>
+
+What can be hijacked using XSS:
+1. Cookie Theft
+2. Session Hijacking
+3. Keylogging - Attackers can log keystrokes to steal sensitive information such as usernames and passwords.
+4. Phishing - Attackers can create fake login forms to steal user credentials.
+5. Malware Distribution
+
+Prevent: 
+	1. Content Security Policy - default-src 'self'; script-src 'self' https://trustedscripts.example.com;
+	2. Sanitize User Inputs
+3. Escape Outputs - Ensure that any data rendered in HTML templates is properly escaped. Escaping means converting potentially harmful characters into their harmless equivalents. For example, converting special HTML characters like < and > into their respective HTML entities (&lt; and &gt;) to prevent XSS attacks.
+4. Validate and Sanitize on Server-Side 
+
+Cross-Site Request Forgery (CSRF): This attack forces a user to execute unwanted actions on a web application in which they are authenticated. It can be used to perform unauthorized actions on behalf of the user.
+Preventing CSRF:
+	1. Anti-CSRF Tokens: Generate a unique token for each session, and include it in forms and AJAX requests. The server checks this token to validate the request. Before sending a form request we have to request server  “/form” for CSRF token The server will generate the CSRF token. We have to take the response add the token in the header and send the actual request 
+“/process”
+2. SameSite Cookie Attribute => Set-Cookie: sessionid=abc123; SameSite=Strict
+3. Custom Request Headers such as axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest’, which is sent for only Ajax requests
+		Using the X-Requested-With header as an additional measure helps distinguish between standard form submissions and AJAX requests, but it's essential to combine this with other CSRF protection mechanisms like CSRF tokens and proper CORS configuration
+	When the browser tries to send the above request, it will first send an OPTIONS preflight request to http://api.example.com/process.
+OPTIONS /process HTTP/1.1
+Host: api.example.com
+Origin: http://malicious.com
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: X-Requested-With, Content-Type
+
+	The server responds to the preflight request. If it is configured correctly, it will not allow the http://malicious.com origin or the X-Requested-With header.
+HTTP/1.1 403 Forbidden
+Access-Control-Allow-Origin: http://example.com
+Access-Control-Allow-Headers: X-Requested-With, Content-Type
+
+
+SQL Injection:
+1. const sqlQuery = `SELECT * FROM products WHERE name = '${searchQuery}'`; 			Giving the user input directly to query leads to SELECT * FROM products WHERE name = ''; DROP TABLE products; --'
+2. we cannot give the user input directly to both sub queries and for where condition parameters
+
+Preventive Measures:
+1. Parameterized Queries / Prepared Statement
+2. Stored Procedures
+3. Input Validation and Sanitization
+4. Use ORM/ODM
+
+Using Components with Known Vulnerabilities can also lead to security issues
+
+Headers Available:
+1. Set-Cookie Header
+    1. HttpOnly : Prevent the cookie to read from javascript Document.cookie
+    2. Secure: If secure flat is ticked then it can be sent via HTTP only
+    3. SameSite: Strict: The cookie is only sent with requests from the same site, None: The cookie is sent with all requests. Lax: The cookie is sent with top-level navigation and same-site requests.
+2. Content Security Policy (CSP) : Content-Security-Policy: default-src 'self'; script-src 'self' https://trusted.cdn.com
+3. Cross-Origin Resource Sharing (CORS) Access-Control-Allow-Origin: https://trusted-origin.com
+4. X-Frame-Options: This header controls whether a webpage can be embedded in an iframe, helping to prevent clickjacking attacks
+    1. DENY: The page cannot be displayed in a frame.
+	2. SAMEORIGIN: The page can only be displayed in a frame on the same origin as the page itself.
+5. X-Content-Type-Options: nosniff
+	This header prevents the browser from MIME-sniffing a response away from the declared content-type, reducing the risk of XSS. MIME-sniffing refers to the process by which a browser determines the content type of a file based on its content rather than relying solely on the Content-Type header provided by the server. This behavior can sometimes lead to security vulnerabilities, particularly cross-site scripting (XSS) attacks
+
+Example Scenario for MIME Sniffing
+1. Incorrect Content-Type: Suppose a server serves a file with user-generated content and sets the header to Content-Type: text/plain.
+2. Malicious Content: An attacker uploads a file with embedded HTML/JavaScript content.
+3. MIME-Sniffing: The browser inspects the content and determines it looks like HTML, so it processes it as HTML rather than plain text.
+4. XSS Attack: The embedded HTML/JavaScript content is executed, leading to an XSS attack.
+
+Subresource Integrity (SRI): helps prevent certain types of attacks, particularly those involving the manipulation of external resources, by ensuring that the resource being loaded has not been tampered with
+<script src="https://example.com/script.js" integrity="sha384-oqVuAfXRKap7fdgcCY5uykM6+R9GqQ8K/uxB3lY4UklV9DgbXPXT0n12Z0aRV8W5" crossorigin="anonymous"></script>
+Steps to Check Resource Integrity
+1. Fetch the Resource
+2. Compute the Hash (e.g., SHA-256, SHA-384, SHA-512)
+3. Compare the Hashes: The browser then compares the computed hash of the fetched resource with the hash value provided in the integrity attribute.
+4. Verify Cross-Origin Requests
+5. Decision to Load or Block
+What Vulnerabilities SRI is preventing:
+CDN Compromise:
+	Without SRI: If the CDN is compromised and the script is replaced with malicious code, the browser will fetch and execute the malicious script without any verification.
+	With SRI: The browser fetches the script and computes its hash. If the content has been altered, the hash will not match the provided hash in the integrity attribute, and the browser will block the script from executing.
+Man-in-the-Middle Attack:
+	With SRI: Any modification to the script content would result in a different hash, causing the integrity check to fail and the browser to block the script.
+	Without SRI: An attacker intercepting the request between the user's browser and the CDN could modify the script content, resulting in the browser executing malicious code.

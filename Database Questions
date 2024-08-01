@@ -1,0 +1,184 @@
+Database:
+1. Types of Indexes in MongoDB:
+	Single Field Index: Single field indexes collect and sort data from a single field in each document in a collection.
+	Compound Index: Compound indexes collect and sort data from two or more fields in each document in a collection. Data is grouped by the first field in the index and then by each subsequent field.
+	Multikey Index: Multikey indexes collect and sort data stored in arrays. MongoDB automatically sets the index to be a multikey index.
+	Text Index: Text indexes support text search queries on fields containing string content.  Text indexes improve performance when searching for specific words or phrases within string content.
+		db.<collection>.createIndex(
+   		{
+      			<field1>: "text",
+      			<field2>: "text",
+     		 .	..
+   		}
+		)
+	Hashed Index: Hashed indexes collect and store hashes of the values of the indexed field.
+	TTL (Time-To-Live) Index: A TTL index automatically removes documents from a collection after a certain amount of time.
+2. Types of Indexes in MySql:
+	Single-Column Index
+	Composite Index (Multi-Column Index)
+	Unique Index
+	Primary Key Index
+	Hash Index
+3. Clustered Index: Only one that is primary key index. Rows are actually arranged in the order or index key. Used to select the specific row using where cond.
+4. Non-cluster Index: All indexes other than PK index. Maintains it’s own Data structures to retrieve the data. Filtering, Sorting all actions are done using non-clustered index, DS actions.
+￼
+Index Performance in DB: Index value can either stored in B-tree with a balanced tree structure or in a Hash table which store the indexed column values in a hash table data structure. When the query is executed, For B-tree indexes, MySQL typically performs a binary search or similar algorithm to quickly find the index value in tree, For hash indexes, MySQL performs a hash lookup operation. Once the index is found it will fetch it’s corresponding row or document from its reference without scanning the entire table. 
+
+Two index in DB: If there are two indexes then each index will take its referenced value and finally the results will be merged and fetched
+
+Difference between SP and functions: 
+	1. Transaction Control will be available in SP but not in Functions, 
+    2. SP accept input, output parameters, functions accept only input parameters
+    3. Functions can be called anywhere like Select statement, where condition etc., SP can be called individually or via code
+    4. SP can modify the data in DB, functions don’t have control over the database
+
+Replica in MongoDB: Replica is duplicating same data across multiple servers. It will take multiple copies across servers. Replica provides 24*7 availability of data. Protection from single server loss, hardware failures and service interruptions. Ensures that data is available to every client. MongoDB structure consists of one primary node and that primary node is connected with multiple secondary nodes. All read/write operations are performed in the primary node and it is updated in secondary node every time. Primary node will send heartbeat signal to all secondary nodes periodically. If secondary node didn’t receive signal then the primary node is considered as failure and any one of the secondary node elects any one of them as primary. If the failed primary node rollbacked again, then it will act as the secondary node. A replica set requires min. Of 3 nodes including primary node and max of 50 nodes. Advantages: Replication helps in disaster recovery and backup of data, Improve application reliability, Replication minimises downtime for maintenance, Load balancing is achieved. Disadvantages: Higher cost and time constraints, Redundant data is stored so more space and server processing is required.  
+The mongos acts as a query router, providing an interface between client applications and the sharded cluster. Config servers store metadata and configuration settings for the cluster. As of MongoDB 3.4, config servers must be deployed as a replica set (CSRS). MongoDB uses the shard key to distribute the collection's documents across shards. The shard key consists of a field or multiple fields in the documents.
+
+Partitioning in MySQL is used to split or partition the rows of a table into separate tables in different locations, but still, it is treated as a single table. It distributes the portions of the table's data across a file system based on the rules we have set as our requirement. Horizontal Partitioning (rows) Vertical Partitioning (columns-mysql doesn’t support). 
+Types: 1. RANGE Partitioning 2. LIST Partitioning 3. HASH Partitioning (In other words, it splits the table as of the value returned by the user-defined expression. It is mainly used to distribute data evenly into the partition. It is performed with the PARTITION BY HASH(expr) clause.) 4. Partition by Key : It is similar to the HASH partitioning where the hash partitioning uses the user-specified expression, and MySQL server supplied the hashing function for key
+
+Handle two requests at the same time: Database Transactions:  ensure that each order is processed atomically, Timestamping, Optimistic Locking: Commit while one process is in transaction  If a conflict is detected, the transaction can be retried or aborted.
+
+Normalisation:
+1NF: Each column contains atomic (indivisible) values, 	Each column contains values of a single type, Each column has a unique name, The order in which data is stored does not matter.
+2NF: All non-key attributes are fully functionally dependent on the primary key (i.e., there are no partial dependencies). A partial dependency occurs when a non-key attribute is dependent on only a part of the composite primary key (when the primary key consists of more than one column). Eg., if there are two columns as combination unique, customer id and order id but if you have one more column customer name which is only dependent on the customer id then there occurs a partial dependency.
+3NF: All the attributes are functionally dependent only on the primary key (i.e., there are no transitive dependencies). A transitive dependency occurs when a non-key attribute is dependent on another non-key attribute. 
+| StudentID | StudentName | CourseID | CourseName | Instructor |
+|-----------|-------------|----------|------------|------------|
+| 1         | John Doe    | 101      | Math       | Mr. Smith  |
+| 1         | John Doe    | 102      | Physics    | Dr. Jones  |
+| 2         | Jane Smith  | 103      | Biology    | Ms. Clark  |
+| 2         | Jane Smith  | 104      | Chemistry  | Dr. Brown  |
+Here, CourseName and Instructor are transitively dependent on CourseID.
+
+Components of MySQL Cluster
+1. Management Node (ndb_mgmd):
+    * The management node handles cluster configuration, management, and monitoring. It coordinates the startup and shutdown of other nodes in the cluster.
+2. Data Nodes (ndbd or ndbmtd):
+    * Data nodes store the actual data and handle data processing. They are responsible for data storage, retrieval, and replication.
+3. SQL Nodes (mysqld):
+    * SQL nodes run the MySQL Server and provide the SQL interface to the cluster. They process SQL queries and interact with data nodes to fetch and manipulate data.
+4. API Nodes:
+    * API nodes use the NDB API to access the data directly. These nodes are useful for applications that require high performance and low latency.
+Use Cases for MySQL Cluster
+* Telecommunications: For real-time subscriber data management and call routing.
+* Financial Services: For high-speed transaction processing and real-time fraud detection.
+* E-commerce: For managing product catalogs, customer data, and real-time inventory management.
+* Gaming: For real-time user data management and game state storage.
+Why MySQL Cluster: High availability ensures that subscriber data is always accessible, while horizontal scalability allows the system to handle millions of subscribers. Real-time performance is crucial for low-latency operations like call setup and messaging.
+Real-time data processing capabilities allow for immediate detection of suspicious activities through the following mechanisms. Continuous Data Ingestion
+* Mechanism: Real-time data processing systems continuously ingest data from various sources, such as transaction logs, user activities, and sensor inputs.
+* Benefit: This ensures that data is available for analysis as soon as it is generated, without delays associated with batch processing.
+Code to Create nodes in cluster
+* Update the MySQL Cluster configuration file (config.ini or similar) on the management node (ndb_mgmd) to include the new nodes. This file typically resides in /var/lib/mysql-cluster.
+
+[ndb_mgmd]
+NodeId=1
+HostName=mgm-node-1
+
+[ndbd]
+NodeId=2
+HostName=data-node-1
+DataDir=/var/lib/mysql-cluster
+
+[ndbd]
+NodeId=3
+HostName=data-node-2
+DataDir=/var/lib/mysql-cluster
+
+[mysqld]
+NodeId=4
+HostName=sql-node-1
+
+# Restart management node with updated configuration
+ndb_mgmd -f /var/lib/mysql-cluster/config.ini
+
+# Initialize and start new data node
+ndbd --initial
+
+# Start MySQL server on new SQL node
+mysqld --ndbcluster --ndb-connectstring=mgm-node-1
+
+# Check cluster status
+ndb_mgm -e show
+
+
+Types of Locks in MySQL:
+1. Shared Locks (LOCK IN SHARE MODE):
+User going to read
+Hence it will lock the row and allows all other transaction to read to row
+It won’t allow any transaction to update the row
+1. Exclusive Locks (FOR UPDATE):
+User going to Update
+Hence it will update the lock the row for others both for read and update.
+The particular transaction which locked can update the data ans release the lock.
+
+Syntax and Examples:
+1. Shared Locks (LOCK IN SHARE MODE):
+
+-- Start a transaction
+START TRANSACTION;
+
+-- Select rows with a shared lock
+SELECT * FROM table_name WHERE condition FOR SHARE;
+
+-- Perform other operations within the transaction
+-- ...
+
+-- Commit the transaction to release locks
+COMMIT;
+
+2. Exclusive Locks (FOR UPDATE):
+
+-- Start a transaction
+START TRANSACTION;
+
+-- Select rows with an exclusive lock
+SELECT * FROM table_name WHERE condition FOR UPDATE;
+
+-- Perform updates or deletes within the transaction
+UPDATE table_name SET column1 = value1 WHERE condition;
+DELETE FROM table_name WHERE condition;
+-- ...
+
+-- Commit or rollback the transaction to release locks
+COMMIT;
+-- or ROLLBACK;
+
+Using FOR UPDATE without a transaction can lead to potential concurrency issues and performance degradation, especially in high-traffic applications. It's crucial to release locks promptly to minimize contention and ensure application responsiveness. The lock acquired with FOR UPDATE remains held until the transaction is either committed or rolled back. This means it's not released automatically at the end of the SELECT statement.
+
+MySQL Pooling: MySQL Pooling, or MySQL Connection Pooling, is a technique used to manage and reuse database connections efficiently. Instead of creating a new database connection every time one is needed, a pool of connections is maintained and reused, which can significantly improve the performance and scalability of database applications.
+  const pool = mysql.createPool({
+    connectionLimit: 10, // Maximum number of connections to create at once
+    host: 'localhost',
+    user: 'root',
+    password: 'password',
+    database: 'mydatabase'
+  });
+Why Pooling: Establishing a new database connection is a resource-intensive operation. It involves several steps like network communication, authentication, and initialization. By reusing connections, the pool minimizes the overhead associated with these steps.
+Disadvantages if we don’t use Pooling: Concurrency Issues like Sequential Processing, Blocking and Resource Management issues like Resource Contention and Connection Limits, Error Handling and Recovery like Single Point of Failure, Limited Scalability, Increased Latency.
+Benefits of Connection Pooling
+	Parallel Processing, Optimized Connections, Reduced Latency, Error Handling, Load Balancing
+
+Sequelize ORM: In Node.js, one of the most popular Object-Relational Mapping (ORM) libraries used with MySQL is Sequelize. Sequelize is a powerful and feature-rich ORM for Node.js that supports various SQL dialects, including MySQL, PostgreSQL, SQLite, and MSSQL.
+Steps in Sequelize:
+1. Model Creation
+2. sequelize.authenticate()
+3. sequelize.sync({ force: true }) // Use { force: true } to drop and re-create tables
+4. await User.create({ username: 'john', email: 'john@example.com' })
+5. await User.findAll();
+6. await User.findOne({ where: { username: 'john' } });
+7. await User.findOne({ where: { username: 'jane' } });
+Key Features of Sequelize is Model Definition, Data Mapping (Map JavaScript objects to database tables and vice versa), Associations(Define relationships between models (e.g., one-to-one, one-to-many, many-to-many).), Query Building, Transactions, Migrations
+
+ACID:
+Atomicity - Ensures that a transaction is treated as a single "atomic" unit, which either completes in its entirety or not at all.
+Consistency - Ensures that a transaction brings the database from one valid state to another, maintaining database rules and constraints. - account balance cannot be negative - DB Contraint
+Isolation - Ensures that concurrent transactions do not interfere with each other. Transactions are isolated from each other until they are completed, preventing temporary inconsistencies.
+Durability - Ensures that once a transaction is committed, it will remain so, even in the case of a system failure. Committed data is permanently recorded.
+
+How will you make sure data consistency? 
+	Transaction, Rollback, Savepoint, No data redundancy, Using locks while updating and reading
+
+

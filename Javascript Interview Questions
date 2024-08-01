@@ -1,0 +1,180 @@
+Javascript:
+
+How js works? Is it framework or library? 
+What search engine? Callback functions, call stack? 
+Ways to create Object => Constructor, Object.create, Object.assign, Normal Object creation, copy object using spread operator
+DeepCopy: New Value and Address Also. DeepCopy can be achieved through loads function, Deep copy can be achieved using structuredClone() function.
+Shallow Copy: A shallow copy creates a new object or array and copies all top-level properties of the original object or array. However, if the original object contains nested objects or arrays, the shallow copy only copies the references to those nested objects or arrays, not the objects themselves. Shallow Copy can be achieved through Object.assign. 
+Different types of functions | Advantages of IIFE
+	Function Declaration
+	Function Expression
+	Arrow Function
+	IIFE - IIFEs are commonly used to create private scope in JavaScript, allowing variables and functions to be encapsulated and inaccessible from outside the function
+	Recursive Function
+	Generator Function
+	Constructor Function
+Explain "this" keyword accessibility
+Immutable datatype | Mutable datatypes
+Promises vs Callbacks 
+setTimeOut vs setInterval Eg	
+Closures Eg 
+Real time eg: Imagine a web page where you can click a button to load and display user data from an API. Each time you click the button, new data is fetched and displayed. The function definition of that button returns the async function of the API call and previously maintains the count of no of calls. The count var act as the closure property and each time that return function is called the value of the count var is preserved. Benefits of Using Closures: (1) State Preservation (2) Encapsulation.  
+Real time use case of Closure:
+1. Data encapsulation and private variables
+2. Event handlers with preserved state
+		function createGreeter(name) {
+ 			function greet() {
+			    console.log("Hello, " + name + "!");
+		  }
+
+ 		 return greet;
+		}
+
+		const button1 = document.getElementById("button1");
+		const button2 = document.getElementById("button2");
+
+		button1.addEventListener("click", createGreeter("Alice"));
+		button2.addEventListener("click", createGreeter("Bob"));
+
+		// Clicking button1 or button2 will now log the corresponding greeting message
+3.  Modules and function currying
+4. Memoization : The cached value is stored in the lexical scope and when again the same function is called with the same variable the cached value will have value hence need not to call the inner return function again to calculate complex variable.
+5. Namespaces and avoiding variable collisions
+6. Iterators and generators
+7. Function factories with configuration
+8. Debouncing and throttling user input
+https://medium.com/deno-the-complete-reference/10-use-cases-of-closures-in-javascript-98fe0eab36db
+
+Call, Apply and Bind Eg
+Call over Normal Function uses:
+1. Setting the `this` Context
+2. Invoking Functions with Different this Values
+Why call or apply Do Not Affect Arrow Functions
+1. Design Intent
+2. Permanent Lexical Binding
+Use strict 
+1. Assigning to Non-Writable Properties
+2. Assigning to Non-Configurable Properties
+3. Assigning to a Getter-Only Property
+4. Assigning to an Undeclared Variable
+5. Assigning to a Read-Only Property
+6. Deleting an Undeletable Property like prototype
+7. Duplicate Parameter Names
+8. Octal Literals like assigning 010
+9. Octal Escape Sequences
+10. No Automatic arguments Object Updates
+11. Changing prototypal properties throws error
+12. this Behavior in function
+
+"use strict";
+function f() {
+    return this;
+}
+console.log(f()); // undefined in strict mode, global object in non-strict mode
+
+
+Variable Hoisting : let and const also will be hoisted but it remains un-initialized, whereas var will be initialised with undefined once hoisted. Since let and const is un-initialized, it will throw reference error before accessing the element.
+Spread operator Eg
+Immediately Invoked Function
+What is localStorage and sessionStorage?
+Web socket
+	The WebSocket object provides the API for creating and managing a WebSocket connection to a server, as well as for sending and receiving data on the connection. To construct a WebSocket , use 	the WebSocket() constructor.
+WebSocket Communication Flow
+1. Handshake
+2. Data Transmission : The data frames sent over the connection are smaller and more efficient compared to HTTP headers
+3. Closing the Connection
+
+drawbacks of cookies
+		Browser Impacts. Cookies are not restricted based on internet usage
+		Security Risks. Since cookies are stored in the hard drive as text files, it posses some serious security risks
+		Size Limitations. Size limitations also exist on cookies.
+		Privacy Concerns
+		Manual Disabling
+Geolocation API - getCurrentPosition(), watchPosition(), clearPosition()
+DOM manipulation overcome 
+Snippets 
+
+
+Adv Javascript:
+How javascript internally works
+What are all the ways to create obj in javascript 
+Variable Hoisting // Snippet
+What is getter and setter, why do we want to use getter and setter incase if we have functions?
+Advantages of arrow functions
+1. Latest Syntax
+2.  Lexical this Binding
+3. No arguments Object
+4. Implicit Return
+5. Simplified Callback
+6. No Duplicate Parameter Names
+Advantages of using class and object, Real time use case of class-
+1. Encapsulate  related data and behavior into a single entity
+2. Class Inheritance and Reusability:
+3. Abstraction
+4. Modularity and Reusability
+Event Propogation:
+Throatling - Throttling limits the number of times a function is called over a specified period. Subsequent events that occur within the interval are ignored until the interval has elapsed.
+Debouncing - When an event occurs, the event handler function is not immediately invoked. Instead, a timer is started, and the function is scheduled to execute after the specified delay.
+Difference between function declaration and function expression
+concept of prototypal inheritance in JavaScript
+JavaScript handle memory management and garbage collection
+	It stores data in two memory spaces, the Stack and the Heap. The stack is used to store static data, whereas the heap is used to store dynamic data. The stack contains references to the objects in a heap. JavaScript also uses a garbage collector to deallocate unused memory from the heap. The mark and sweep technique is one of the most common garbage collection algorithms.
+Event Bubbling
+Event Propagation
+Debouncing:
+	A Debounce function is a higher-order function that returns another function, to create closure around the function parameters (func, timeout) and the timer variable. Delay the operation which is written on the event for the certain period of time to avoid continuous execution of that operation. 
+Function Currying 
+Memoization in JS:
+	Memoization is an optimization technique used to improve the performance of functions by caching the results of expensive function calls and returning the cached result when the same inputs occur again. Cache the result of an recursive function, with its parameter as the cache keyword. (cache[param]). If same parameter again comes then we can return the result from cache.
+Memization (cache in js) can be achieved using HOF (higher order functions). Check memoization in JS with fibnocci series as example.
+Side Effects: Refers to any changes that a function makes outside of its scope, particularly changes to the state of variables or objects outside of the function's local scope. These changes could include performing I/O operations such as writing to the console or modifying the DOM in a web environment.
+Generic: You can define functions that work with any data type using generics. This allows you to write functions that are type-safe and reusable across different types.
+Handle WebSocket: 
+1.  Server : Create a web socket server, Client: Connect to a server web socket by using server point and domain
+2. Client: Open events. socket.addEventListener("open”, (event) => ()). Through this event we will come to know that connection established successfully
+3. Server: Once connection established, sends a message in ws.send(“”message to client). Client: Receives the server message, socket.addEventListener("message", (event) => {})
+4. Client: Client can send message through socket.send(“”Message to server”). Server: It can receive client’s message on ws.on("message", (message) => {})
+
+Publish/Subscribe a particular topic is not implemented in Websocket. Though it is implemented in other latest services like Kafka, RabbitMQ etc., But if you want to publish or subscribe a message under a particular topic then you have to do manually. You can send a JSON message with key value as the topic and get the message with particular key value in client. 
+If there are multiple client connection in server, and if each client is having specific topic then you can create Map for each client and their topics can be added in Set, so that topics won’t be repeated. Next time if you want to publish a particular message from a particular client from a particular topic you can choose and send from server. 
+WebSocket event available at client side is Open, Message, Close and Error, available at the server side is Connection, Message, Close and Error.
+Network Disconnection during socket messages: It involves following steps in client side if server fails to send message from client to server, 1. Detecting Disconnection, 2. Reconnecting, 3. Message Queue, 4. Heartbeat/Ping-Pong
+if (socket.readyState === WebSocket.OPEN) {
+         socket.send(message);
+ } else {
+       messageQueue.push(message);
+ }
+If server fails while publishing the message, then all the messages can be stored in DB with the status of each message, so that we will be having track of what messages sent and received. All client should be in a position to reconnect server for multiple times. 
+Authentication in Websocket can be achieved through sending the token in url as query params (less preferred),(2) using cookie and session. The token can be send from client over TCP as request cookie and in the node js the cookie can be parsed using cookie-parser and validate the JSON token and set session id and name for the particular validated user. (3) Token can also be sent over req.headers which is complex and less preferred. 
+
+Memory Management in Javascript: 
+1. Static Memory - Static memory allocation is the process of allocating fixed memory space at compile time before the associated program is executed.
+2. Dynamic memory allocation occurs at runtime, allowing for flexible memory usage as needed by the application.
+3. Primitives are stored directly on the stack, while objects are stored in the heap and accessed via references.
+Garbage Collection: JavaScript uses garbage collection to automatically reclaim memory occupied by objects that are no longer reachable in the program.The most common garbage collection algorithm used is mark-and-sweep. 
+Mark Phase: The garbage collector traverses the object graph, starting from the root, marking all reachable objects.
+Sweep Phase: The collector then deallocates memory occupied by objects that were not marked as reachable.
+Key Points in JavaScript Memory Management
+1. Automatic Memory Management
+2. Scope and Lifetimes - Local variables within functions are eligible for garbage collection once the function execution is complete, provided there are no references to them.
+3. Closures - Variables within closures can prevent memory from being reclaimed if references to the closure persist, potentially leading to memory leaks.
+4. Common Pitfalls: Memory Leaks and Global Variables - Variables declared without var, let, or const become global and persist throughout the lifetime of the application, leading to potential memory bloat.
+5. DOM References: Ensure that references to DOM elements are removed when the elements are no longer needed.
+6. Clear Timers and Callbacks
+Tools and Techniques for Detecting Memory Leaks in Node.js
+1. To Identify memory leaks we can take heap snapshot both at initial stage of Application and after complex operation of the application. The heap snapshot shows the memory occupied for each variable types like object, string, array. Under developer tools-> Memory we could take heap snapshot
+2. Monitoring Memory Usage: Regularly monitor the memory usage of your Node.js application. A consistent increase in memory usage over time without a corresponding drop indicates a potential memory leak.
+
+Just-In-Time Compiler: Just-In-Time (JIT) compilation is a technique used to improve the performance of interpreted languages like JavaScript by compiling code into machine code at runtime, rather than before execution. JIT compilation aims to combine the advantages of both interpretation and compilation.
+	How JIT Compilation Works : Interpretation - The interpreter executes the code line by line, converting each line to machine code and running it immediately, Hot Code Detection - The JIT compiler monitors the running code to detect frequently executed (hot) code paths or functions, Compilation and Execution 
+	JIT compilers can make use of runtime information to apply more effective optimizations that are not possible during ahead-of-time compilation.
+This can include inlining functions, optimizing loops, and eliminating redundant calculations.
+Difference between interpretation and Compilation:
+Interpretation: Directly executes source code line by line. Provides immediate feedback and portability but can be slower.
+Compilation: Translates the entire source code into machine code before execution. Provides faster execution and optimizations but is platform-specific.
+JIT Compilation: Combines interpretation and compilation, compiling frequently executed code at runtime for better performance while retaining flexibility.
+	JavaScript is often described as an interpreted language because, traditionally, it was executed directly by the browser's JavaScript engine without an explicit compilation step.
+
+Ahead-Of-Time Compilation (AOT Compilation) - Not used in JS
+AOT compilation involves compiling the source code or an intermediate representation (like bytecode) into native machine code before the program is executed. The compiled native code is then executed directly without further compilation steps during runtime.
+Static Compilation, No Runtime Compilation, Lack of Adaptability, Complexity, No Optimisation but it is Performancable, Predictability and Fast.

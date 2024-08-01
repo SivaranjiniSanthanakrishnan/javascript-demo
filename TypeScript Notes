@@ -1,0 +1,26 @@
+TypeScript:
+1. Type Inference: We don’t want to implicitly mention the type for each variable. Once we assign the variable with the particular value, it will take the type as the initial assigned value, later if u try to change the type it will through error
+2. If we declare variable without type or even if we don’t initialise the variable without value then automatically TS will infer the any type.
+3. TS will automatically infer/guess the return type of the function also. If function returns two types then this is how it will infer (string | number). But it is good to have return type  of the function mentioned after params because of the standard coding practice and it will be diff if return type buried in lots line of code if fn is larger. If we don’t return anything from the function it will auto take void type
+4. Types of the callback functions inside map and all it will automatically detect type based on the looping variable / array. 
+5. Never: If the function should not mandatorily return anything then we could annotate the function with never. Unlike void it means that the fn return null/undefined or TS don’t care about the return type of void fn. But if we specifically mention never return type then it will mandatorily check that the function returns nothing
+6. Readonly property given types’s values can’t be re-assigned but it will accept the initial value 
+7. Intersection Types: & allows us to combine two types properties and we can assign to single type
+8. 2D array types can be represented as number[][] (2D array of numbers) / string[][] (2D array of strings)
+9. Union Types: Giving or condition to type (price : number | string).  Type Narrowing is checking type before executing with its value, because we can’t multiply price if it val is “$25”. Hence check type before executing and work accordingly
+10. const stuff : (number | string) [] = [1, “two”, 3, “four”] Meaning that we can have array elements either number or string
+11. Typescript will validate both the data type and the no of elements. Eg: let Rgb : [number, number, number] = [32,53,23]. Tuples at initialisation do validation, but it won’t do validation while pushing / poping from array.
+12. Enum if we don’t assign any val then it will take automatically value from 0 and increments for the subsequent elements. 
+13. If we create a simple enum in ts then while compiling it in js it has to convert the enum value to IIFE, with the enum name as global variable declared and change the global variable’s value according to which we mentioned in enum. Since to avoid this complicated structure we can simply declare enum as const so in js instead of IIFE and declaring obj it will itself declare const var.
+14. Interfaces are used to design object structure and types
+15. Difference between type and Interface
+    1. Interface accepts only object. It is used to design only object. Type accepts all data types like array, enum, obj etc.,
+    2. If we write the same interface again it will take both the properties of the interface, instead in type it will overwrite the first type properties and take only the latest one
+    3. Interface can be inherited even multiple interface can be inherited, types cannot be inherited
+16. Command to Compile and watch Typescript multiple files: tsc
+17. Files:[] List files for which tic compilation has to be done
+18. Include: [] List of directory or files for which tic compilation has to be included
+19. Exclude [] List of directory or files for which tic compilation has to be excluded
+20. Outdir directory to place all compiled js files, usually it will be Dist
+21. Target: “es5” What is the converted javascript’s target version. If it is a latest version then all the arrow function could be seen in js files
+22. Other compiler Options: allowJs: true It will allow our TS directory to contain js file, checkJS: true Compile / find errors in JS files. noEmit: true If TS throws error then JS file will not be created
